@@ -30,7 +30,9 @@ jobs:
           - ${{ needs.versionExtract.outputs.minVersion }}
           - ${{ needs.versionExtract.outputs.maxVersion }}
         directory:
-          - examples/complete
+          - examples/s3_hosted
+          - examples/self_hosted
+          - examples/ssm_hosted
 
     steps:
       - name: Checkout

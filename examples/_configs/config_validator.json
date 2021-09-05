@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "isEnabled": {
+      "type": "boolean"
+    },
+    "messageOption": {
+      "type": "string",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false,
+  "required": ["isEnabled", "messageOption"]
+}
