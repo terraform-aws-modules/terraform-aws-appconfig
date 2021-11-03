@@ -39,8 +39,8 @@ Note that this example may create resources which will incur monetary charges on
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_appconfig"></a> [appconfig](#module\_appconfig) | ../../ | n/a |
-| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | terraform-aws-modules/s3-bucket/aws | ~> 2 |
-| <a name="module_validate_lambda"></a> [validate\_lambda](#module\_validate\_lambda) | terraform-aws-modules/lambda/aws | ~> 2 |
+| <a name="module_s3_bucket"></a> [s3\_bucket](#module\_s3\_bucket) | terraform-aws-modules/s3-bucket/aws | ~> 2.0 |
+| <a name="module_validate_lambda"></a> [validate\_lambda](#module\_validate\_lambda) | terraform-aws-modules/lambda/aws | ~> 2.0 |
 
 ## Resources
 

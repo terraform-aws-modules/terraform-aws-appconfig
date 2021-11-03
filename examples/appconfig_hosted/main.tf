@@ -24,7 +24,7 @@ data "archive_file" "lambda_handler" {
 
 module "validate_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 2"
+  version = "~> 2.0"
 
   function_name = local.name
   description   = "Configuration semantic validation lambda"
