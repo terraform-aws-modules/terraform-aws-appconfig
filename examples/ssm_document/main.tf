@@ -4,40 +4,13 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "example2-${replace(basename(path.cwd), "_", "-")}"
+  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
 
   tags = {
-    Example     = local.name
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-appconfig"
   }
-}
-
-################################################################################
-# Supporting Resources
-################################################################################
-
-resource "aws_ssm_document" "config_schema" {
-  name            = local.name
-  content         = file("../_configs/config_validator.json")
-  document_format = "JSON"
-  document_type   = "ApplicationConfigurationSchema"
-
-  tags = local.tags
-}
-
-resource "aws_ssm_document" "config" {
-  name            = local.name
-  content         = file("../_configs/config.json")
-  document_format = "JSON"
-  document_type   = "ApplicationConfiguration"
-  # NOTE - this does not work - it is not supported in the AWS provider yet
-  # However, the AWS API requires something like this
-  # document_requires = [{
-  #   name    = aws_ssm_document.config_schema.name
-  #   version = aws_ssm_document.config_schema.latest_version
-  # }]
-
-  tags = local.tags
 }
 
 ################################################################################
@@ -74,6 +47,34 @@ module "appconfig" {
 
   # deployment
   deployment_configuration_version = aws_ssm_document.config.latest_version
+
+  tags = local.tags
+}
+
+################################################################################
+# Supporting Resources
+################################################################################
+
+resource "aws_ssm_document" "config_schema" {
+  name            = local.name
+  content         = file("../_configs/config_validator.json")
+  document_format = "JSON"
+  document_type   = "ApplicationConfigurationSchema"
+
+  tags = local.tags
+}
+
+resource "aws_ssm_document" "config" {
+  name            = local.name
+  content         = file("../_configs/config.json")
+  document_format = "JSON"
+  document_type   = "ApplicationConfiguration"
+  # NOTE - this does not work - it is not supported in the AWS provider yet
+  # However, the AWS API requires something like this
+  # document_requires = [{
+  #   name    = aws_ssm_document.config_schema.name
+  #   version = aws_ssm_document.config_schema.latest_version
+  # }]
 
   tags = local.tags
 }

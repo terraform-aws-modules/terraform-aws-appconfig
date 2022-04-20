@@ -1,14 +1,23 @@
 # AWS AppConfig Terraform module
 
+## ⚠️ Module has moved to `terraform-aws-modules`
+
+This module has moved to the terraform-aws-modules organization. Users will need to update their module source:
+
+```diff
+- source = "clowdhaus/appconfig/aws"
++ source = "terraform-aws-modules/appconfig/aws"
+```
+
 Terraform module which creates AWS AppConfig resources.
 
 ## Usage
 
-See [`examples`](./examples) directory for working examples to reference:
+See [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples) directory for working examples to reference:
 
 ```hcl
 module "appconfig" {
-  source  = "clowdhaus/appconfig/aws"
+  source  = "terraform-aws-modules/appconfig/aws"
   version = "~> 1.0"
 
   name        = "example"
@@ -65,28 +74,13 @@ module "appconfig" {
 
 ## Examples
 
-Examples codified under the [`examples`](./examples) are intended
+Examples codified under the [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples) are intended
  give users references for how to use the module(s) as well as testing/validating changes to the source code of the module(s). If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
-- [AppConfig Hosted](./examples/appconfig_hosted)
-- [S3](./examples/s3)
-- [SSM Document](./examples/ssm_document)
-- [SSM Parameter](./examples/ssm_parameter)
-
-## Security & Compliance [<img src="https://raw.githubusercontent.com/clowdhaus/terraform-aws-appconfig/main/.github/images/bridgecrew.svg" width="250" align="right" />](https://bridgecrew.io/)
-
-Security scanning results provided by Bridgecrew. Bridgecrew is the leading fully hosted, cloud-native solution providing continuous Terraform security and compliance.
-
-| Benchmark | Description |
-|--------|---------------|
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=INFRASTRUCTURE+SECURITY) | Infrastructure Security Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/cis_aws)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=CIS+AWS+V1.2) | Center for Internet Security, AWS Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/pci_dss_v321)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=PCI-DSS+V3.2.1) | Payment Card Industry Data Security Standards Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=NIST-800-53) | National Institute of Standards and Technology Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=ISO27001) | Information Security Management System, ISO/IEC 27001 Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=SOC2) | Service Organization Control 2 Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=HIPAA) | Health Insurance Portability and Accountability Compliance |
-| [![Infrastructure Tests](https://www.bridgecrew.cloud/badges/github/clowdhaus/terraform-aws-appconfig/fedramp_moderate)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=clowdhaus%2Fterraform-aws-appconfig&benchmark=FEDRAMP+%28MODERATE%29) | FedRAMP Moderate Impact Level |
+- [AppConfig Hosted](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/appconfig_hosted)
+- [S3](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/s3)
+- [SSM Document](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/ssm_document)
+- [SSM Parameter](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/ssm_parameter)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -200,4 +194,4 @@ No modules.
 
 ## License
 
-Apache-2.0 Licensed. See [LICENSE](LICENSE).
+Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-appconfig/blob/main/LICENSE).

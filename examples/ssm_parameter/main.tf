@@ -4,12 +4,56 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "example-${replace(basename(path.cwd), "_", "-")}"
+  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
 
   tags = {
-    Example     = local.name
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-appconfig"
   }
+}
+
+################################################################################
+# AppConfig
+################################################################################
+
+module "appconfig" {
+  source = "../../"
+
+  name        = local.name
+  description = "SSM Parameter - ${local.name}"
+
+  # environments
+  environments = {
+    nonprod = {
+      name        = "nonprod"
+      description = "NonProd environment - ${local.name}"
+    },
+    prod = {
+      name        = "prod"
+      description = "Prod environment - ${local.name}"
+    }
+  }
+
+  # configuration profile
+  use_ssm_parameter_configuration = true
+  ssm_parameter_configuration_arn = aws_ssm_parameter.config.arn
+  retrieval_role_description      = "Role to retrieve configuration stored in SSM parameter"
+  config_profile_location_uri     = "ssm-parameter://${aws_ssm_parameter.config.name}"
+  config_profile_validator = [{
+    # # SSM parameters do not require a validation method, but it is recommended that you create a validation check
+    # # for new or updated SSM parameter configurations by using AWS Lambda.
+    #   type    = "JSON_SCHEMA"
+    #   content = file("../_configs/config_validator.json")
+    # }, {
+    type    = "LAMBDA"
+    content = module.validate_lambda.lambda_function_arn
+  }]
+
+  # deployment
+  deployment_configuration_version = aws_ssm_parameter.config.version
+
+  tags = local.tags
 }
 
 ################################################################################
@@ -56,49 +100,6 @@ resource "aws_ssm_parameter" "config" {
 
   type  = "String"
   value = jsonencode(file("../_configs/config.json"))
-
-  tags = local.tags
-}
-
-################################################################################
-# AppConfig
-################################################################################
-
-module "appconfig" {
-  source = "../../"
-
-  name        = local.name
-  description = "SSM Parameter - ${local.name}"
-
-  # environments
-  environments = {
-    nonprod = {
-      name        = "nonprod"
-      description = "NonProd environment - ${local.name}"
-    },
-    prod = {
-      name        = "prod"
-      description = "Prod environment - ${local.name}"
-    }
-  }
-
-  # configuration profile
-  use_ssm_parameter_configuration = true
-  ssm_parameter_configuration_arn = aws_ssm_parameter.config.arn
-  retrieval_role_description      = "Role to retrieve configuration stored in SSM parameter"
-  config_profile_location_uri     = "ssm-parameter://${aws_ssm_parameter.config.name}"
-  config_profile_validator = [{
-    # # SSM parameters do not require a validation method, but it is recommended that you create a validation check
-    # # for new or updated SSM parameter configurations by using AWS Lambda.
-    #   type    = "JSON_SCHEMA"
-    #   content = file("../_configs/config_validator.json")
-    # }, {
-    type    = "LAMBDA"
-    content = module.validate_lambda.lambda_function_arn
-  }]
-
-  # deployment
-  deployment_configuration_version = aws_ssm_parameter.config.version
 
   tags = local.tags
 }

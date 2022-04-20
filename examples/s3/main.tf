@@ -4,17 +4,59 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "example-${replace(basename(path.cwd), "_", "-")}"
+  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
 
   tags = {
-    Example     = local.name
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-appconfig"
   }
 }
 
 data "aws_region" "current" {}
 
 data "aws_caller_identity" "current" {}
+
+################################################################################
+# AppConfig
+################################################################################
+
+module "appconfig" {
+  source = "../../"
+
+  name        = local.name
+  description = "S3 - ${local.name}"
+
+  # environments
+  environments = {
+    nonprod = {
+      name        = "nonprod"
+      description = "NonProd environment - ${local.name}"
+    },
+    prod = {
+      name        = "prod"
+      description = "Prod environment - ${local.name}"
+    }
+  }
+
+  # configuration profile
+  use_s3_configuration        = true
+  s3_configuration_bucket_arn = module.s3_bucket.s3_bucket_arn
+  retrieval_role_description  = "Role to retrieve configuration stored in S3"
+  config_profile_location_uri = "s3://${module.s3_bucket.s3_bucket_id}/${aws_s3_bucket_object.config.id}"
+  config_profile_validator = [{
+    type    = "JSON_SCHEMA"
+    content = file("../_configs/config_validator.json")
+    }, {
+    type    = "LAMBDA"
+    content = module.validate_lambda.lambda_function_arn
+  }]
+
+  # deployment
+  deployment_configuration_version = aws_s3_bucket_object.config.version_id
+
+  tags = local.tags
+}
 
 ################################################################################
 # Supporting Resources
@@ -55,7 +97,7 @@ module "validate_lambda" {
 }
 
 module "s3_bucket" {
-  source  = "terraform-aws-modules/s3-bucket/aws" # bridgecrew:skip=BC_AWS_S3_14:Bucket does encrypt at rest, flaky test due to module
+  source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 2.0"
 
   bucket = "${local.name}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
@@ -92,47 +134,6 @@ resource "aws_s3_bucket_object" "config" {
   source                 = "../_configs/config.json"
   etag                   = filemd5("../_configs/config.json")
   server_side_encryption = "AES256"
-
-  tags = local.tags
-}
-
-################################################################################
-# AppConfig
-################################################################################
-
-module "appconfig" {
-  source = "../../"
-
-  name        = local.name
-  description = "S3 - ${local.name}"
-
-  # environments
-  environments = {
-    nonprod = {
-      name        = "nonprod"
-      description = "NonProd environment - ${local.name}"
-    },
-    prod = {
-      name        = "prod"
-      description = "Prod environment - ${local.name}"
-    }
-  }
-
-  # configuration profile
-  use_s3_configuration        = true
-  s3_configuration_bucket_arn = module.s3_bucket.s3_bucket_arn
-  retrieval_role_description  = "Role to retrieve configuration stored in S3"
-  config_profile_location_uri = "s3://${module.s3_bucket.s3_bucket_id}/${aws_s3_bucket_object.config.id}"
-  config_profile_validator = [{
-    type    = "JSON_SCHEMA"
-    content = file("../_configs/config_validator.json")
-    }, {
-    type    = "LAMBDA"
-    content = module.validate_lambda.lambda_function_arn
-  }]
-
-  # deployment
-  deployment_configuration_version = aws_s3_bucket_object.config.version_id
 
   tags = local.tags
 }

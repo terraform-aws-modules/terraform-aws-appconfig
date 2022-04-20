@@ -4,50 +4,13 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "example-${replace(basename(path.cwd), "_", "-")}"
+  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
 
   tags = {
-    Example     = local.name
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-appconfig"
   }
-}
-
-################################################################################
-# Supporting Resources
-################################################################################
-
-data "archive_file" "lambda_handler" {
-  type        = "zip"
-  source_file = "../_configs/validate.py"
-  output_path = "../_configs/validate.zip"
-}
-
-module "validate_lambda" {
-  source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 2.0"
-
-  function_name = local.name
-  description   = "Configuration semantic validation lambda"
-  handler       = "validate.handler"
-  runtime       = "python3.9"
-  publish       = true
-  memory_size   = 512
-  timeout       = 120
-
-  cloudwatch_logs_retention_in_days = 7
-  attach_tracing_policy             = true
-  tracing_mode                      = "Active"
-
-  create_package         = false
-  local_existing_package = data.archive_file.lambda_handler.output_path
-
-  allowed_triggers = {
-    AppConfig = {
-      service = "appconfig"
-    },
-  }
-
-  tags = local.tags
 }
 
 ################################################################################
@@ -92,6 +55,44 @@ module "appconfig" {
     type    = "LAMBDA"
     content = module.validate_lambda.lambda_function_arn
   }]
+
+  tags = local.tags
+}
+
+################################################################################
+# Supporting Resources
+################################################################################
+
+data "archive_file" "lambda_handler" {
+  type        = "zip"
+  source_file = "../_configs/validate.py"
+  output_path = "../_configs/validate.zip"
+}
+
+module "validate_lambda" {
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "~> 2.0"
+
+  function_name = local.name
+  description   = "Configuration semantic validation lambda"
+  handler       = "validate.handler"
+  runtime       = "python3.9"
+  publish       = true
+  memory_size   = 512
+  timeout       = 120
+
+  cloudwatch_logs_retention_in_days = 7
+  attach_tracing_policy             = true
+  tracing_mode                      = "Active"
+
+  create_package         = false
+  local_existing_package = data.archive_file.lambda_handler.output_path
+
+  allowed_triggers = {
+    AppConfig = {
+      service = "appconfig"
+    },
+  }
 
   tags = local.tags
 }
