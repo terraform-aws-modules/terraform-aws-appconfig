@@ -1,19 +1,10 @@
 # AWS AppConfig Terraform module
 
-## ⚠️ Module has moved to `terraform-aws-modules`
-
-This module has moved to the terraform-aws-modules organization. Users will need to update their module source:
-
-```diff
-- source = "clowdhaus/appconfig/aws"
-+ source = "terraform-aws-modules/appconfig/aws"
-```
-
 Terraform module which creates AWS AppConfig resources.
 
 ## Usage
 
-See [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples) directory for working examples to reference:
+See [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples) directory for working examples to reference:
 
 ```hcl
 module "appconfig" {
@@ -74,13 +65,13 @@ module "appconfig" {
 
 ## Examples
 
-Examples codified under the [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples) are intended
+Examples codified under the [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples) are intended
  give users references for how to use the module(s) as well as testing/validating changes to the source code of the module(s). If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
-- [AppConfig Hosted](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/appconfig_hosted)
-- [S3](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/s3)
-- [SSM Document](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/ssm_document)
-- [SSM Parameter](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/main/examples/ssm_parameter)
+- [AppConfig Hosted](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/appconfig_hosted)
+- [S3](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/s3)
+- [SSM Document](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm_document)
+- [SSM Parameter](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm_parameter)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -194,4 +185,4 @@ No modules.
 
 ## License
 
-Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-appconfig/blob/main/LICENSE).
+Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-appconfig/blob/master/LICENSE).

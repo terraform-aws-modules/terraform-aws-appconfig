@@ -83,4 +83,4 @@ No inputs.
 | <a name="output_retrieval_role_unique_id"></a> [retrieval\_role\_unique\_id](#output\_retrieval\_role\_unique\_id) | Stable and unique string identifying the retrieval role |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-appconfig/blob/main/LICENSE).
+Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-appconfig/blob/master/LICENSE).
