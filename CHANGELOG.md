@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.1.2](https://github.com/terraform-aws-modules/terraform-aws-appconfig/compare/v1.1.1...v1.1.2) (2022-10-27)
+
+
+### Bug Fixes
+
+* Update CI configuration files to use latest version ([#2](https://github.com/terraform-aws-modules/terraform-aws-appconfig/issues/2)) ([0f359d8](https://github.com/terraform-aws-modules/terraform-aws-appconfig/commit/0f359d8a154dcac5b8ea6adf6f5b42699b53903a))
+
 ### [1.1.1](https://github.com/terraform-aws-modules/terraform-aws-appconfig/compare/v1.1.0...v1.1.1) (2022-04-21)
 
 
