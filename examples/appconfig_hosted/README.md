@@ -27,7 +27,7 @@ Note that this example may create resources which will incur monetary charges on
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.55 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.6 |
 
 ## Providers
 
