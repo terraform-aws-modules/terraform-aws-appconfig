@@ -98,7 +98,7 @@ module "validate_lambda" {
 
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   bucket = "${local.name}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
   acl    = "private"
