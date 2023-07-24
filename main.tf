@@ -48,6 +48,7 @@ resource "aws_appconfig_configuration_profile" "this" {
 
   name        = coalesce(var.config_profile_name, var.name)
   description = coalesce(var.config_profile_description, var.description)
+  type        = var.config_profile_type
 
   location_uri       = var.config_profile_location_uri
   retrieval_role_arn = var.use_hosted_configuration ? null : local.retrieval_role_arn

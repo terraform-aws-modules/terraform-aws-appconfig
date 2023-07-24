@@ -43,6 +43,12 @@ variable "config_profile_description" {
   default     = null
 }
 
+variable "config_profile_type" {
+  description = "Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform"
+  type        = string
+  default     = "AWS.Freeform"
+}
+
 variable "config_profile_location_uri" {
   description = "A URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object"
   type        = string
