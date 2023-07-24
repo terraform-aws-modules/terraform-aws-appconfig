@@ -69,6 +69,7 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
  give users references for how to use the module(s) as well as testing/validating changes to the source code of the module(s). If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
 - [AppConfig Hosted](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/appconfig_hosted)
+- [Feature Flag](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/feature_flag)
 - [S3](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/s3)
 - [SSM Document](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm_document)
 - [SSM Parameter](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm_parameter)
