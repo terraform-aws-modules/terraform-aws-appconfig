@@ -91,7 +91,7 @@ resource "aws_appconfig_deployment_strategy" "this" {
 }
 
 resource "aws_appconfig_deployment" "this" {
-  for_each = var.create ? var.environments : {}
+  for_each = var.create && (var.deployment_configuration_version != null) ? var.environments : {}
 
   description              = coalesce(var.deployment_description, var.description)
   application_id           = aws_appconfig_application.this[0].id
