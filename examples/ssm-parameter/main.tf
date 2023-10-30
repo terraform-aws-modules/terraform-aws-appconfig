@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
+  name   = "ex-${basename(path.cwd)}"
 
   tags = {
     Name       = local.name
@@ -17,18 +17,11 @@ locals {
 # AppConfig
 ################################################################################
 
-module "deactivated_appconfig" {
-  source = "../../"
-
-  name   = local.name
-  create = false
-}
-
 module "appconfig" {
   source = "../../"
 
   name        = local.name
-  description = "AppConfig hosted - ${local.name}"
+  description = "SSM Parameter - ${local.name}"
 
   # environments
   environments = {
@@ -42,19 +35,23 @@ module "appconfig" {
     }
   }
 
-  # hosted config version
-  use_hosted_configuration           = true
-  hosted_config_version_content_type = "application/json"
-  hosted_config_version_content      = file("../_configs/config.json")
-
   # configuration profile
+  use_ssm_parameter_configuration = true
+  ssm_parameter_configuration_arn = aws_ssm_parameter.config.arn
+  retrieval_role_description      = "Role to retrieve configuration stored in SSM parameter"
+  config_profile_location_uri     = "ssm-parameter://${aws_ssm_parameter.config.name}"
   config_profile_validator = [{
-    type    = "JSON_SCHEMA"
-    content = file("../_configs/config_validator.json")
-    }, {
+    # # SSM parameters do not require a validation method, but it is recommended that you create a validation check
+    # # for new or updated SSM parameter configurations by using AWS Lambda.
+    #   type    = "JSON_SCHEMA"
+    #   content = file("../_configs/config_validator.json")
+    # }, {
     type    = "LAMBDA"
     content = module.validate_lambda.lambda_function_arn
   }]
+
+  # deployment
+  deployment_configuration_version = aws_ssm_parameter.config.version
 
   tags = local.tags
 }
@@ -71,7 +68,7 @@ data "archive_file" "lambda_handler" {
 
 module "validate_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 2.0"
+  version = "~> 6.0"
 
   function_name = local.name
   description   = "Configuration semantic validation lambda"
@@ -93,6 +90,16 @@ module "validate_lambda" {
       service = "appconfig"
     },
   }
+
+  tags = local.tags
+}
+
+resource "aws_ssm_parameter" "config" {
+  name        = local.name
+  description = "Example SSM parameter for ${local.name}"
+
+  type  = "String"
+  value = jsonencode(file("../_configs/config.json"))
 
   tags = local.tags
 }

@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
+  name   = "ex-${basename(path.cwd)}"
 
   tags = {
     Name       = local.name
@@ -14,7 +14,6 @@ locals {
 }
 
 data "aws_region" "current" {}
-
 data "aws_caller_identity" "current" {}
 
 ################################################################################
@@ -43,7 +42,7 @@ module "appconfig" {
   use_s3_configuration        = true
   s3_configuration_bucket_arn = module.s3_bucket.s3_bucket_arn
   retrieval_role_description  = "Role to retrieve configuration stored in S3"
-  config_profile_location_uri = "s3://${module.s3_bucket.s3_bucket_id}/${aws_s3_bucket_object.config.id}"
+  config_profile_location_uri = "s3://${module.s3_bucket.s3_bucket_id}/${aws_s3_object.config.id}"
   config_profile_validator = [{
     type    = "JSON_SCHEMA"
     content = file("../_configs/config_validator.json")
@@ -53,7 +52,7 @@ module "appconfig" {
   }]
 
   # deployment
-  deployment_configuration_version = aws_s3_bucket_object.config.version_id
+  deployment_configuration_version = aws_s3_object.config.version_id
 
   tags = local.tags
 }
@@ -70,7 +69,7 @@ data "archive_file" "lambda_handler" {
 
 module "validate_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 2.0"
+  version = "~> 6.0"
 
   function_name = local.name
   description   = "Configuration semantic validation lambda"
@@ -98,7 +97,7 @@ module "validate_lambda" {
 
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   bucket = "${local.name}-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
   acl    = "private"
@@ -107,11 +106,6 @@ module "s3_bucket" {
 
   # Intended for example use only
   force_destroy = true
-
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
 
   server_side_encryption_configuration = {
     rule = {
@@ -128,7 +122,7 @@ module "s3_bucket" {
   tags = local.tags
 }
 
-resource "aws_s3_bucket_object" "config" {
+resource "aws_s3_object" "config" {
   bucket                 = module.s3_bucket.s3_bucket_id
   key                    = "s3/config.json"
   source                 = "../_configs/config.json"

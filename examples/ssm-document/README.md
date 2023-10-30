@@ -1,11 +1,10 @@
-# SSM Parameter AWS AppConfig Example
+# SSM Document AWS AppConfig Example
+
+### :warning: Note - this example does work at this time due to the Terraform AWS provider lacking support for AppConfig using an SSM Document
 
 Configuration in this directory creates:
 
-- AWS AppConfig application containing:
-  - (x2) AWS AppConfig environments (`nonprod`/`prod`)
-  - Configuration stored in an SSM Parameter
-  - Lambda validation function
+- AWS AppConfig application containing (x2) AWS AppConfig environments (`nonprod`/`prod`) with configuration stored in an SSM Document
 
 ## Usage
 
@@ -24,30 +23,27 @@ Note that this example may create resources which will incur monetary charges on
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
-| <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.55 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.55 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_appconfig"></a> [appconfig](#module\_appconfig) | ../../ | n/a |
-| <a name="module_validate_lambda"></a> [validate\_lambda](#module\_validate\_lambda) | terraform-aws-modules/lambda/aws | ~> 2.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_ssm_parameter.config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
-| [archive_file.lambda_handler](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [aws_ssm_document.config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_document) | resource |
+| [aws_ssm_document.config_schema](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_document) | resource |
 
 ## Inputs
 
