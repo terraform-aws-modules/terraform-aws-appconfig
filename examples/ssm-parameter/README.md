@@ -40,7 +40,7 @@ Note that this example may create resources which will incur monetary charges on
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_appconfig"></a> [appconfig](#module\_appconfig) | ../../ | n/a |
-| <a name="module_validate_lambda"></a> [validate\_lambda](#module\_validate\_lambda) | terraform-aws-modules/lambda/aws | ~> 2.0 |
+| <a name="module_validate_lambda"></a> [validate\_lambda](#module\_validate\_lambda) | terraform-aws-modules/lambda/aws | ~> 6.0 |
 
 ## Resources
 
