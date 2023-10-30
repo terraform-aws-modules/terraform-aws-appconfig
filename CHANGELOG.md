@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0](https://github.com/terraform-aws-modules/terraform-aws-appconfig/compare/v1.1.4...v2.0.0) (2023-10-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* Add support for feature flag (#8)
+
+### Features
+
+* Add support for feature flag ([#8](https://github.com/terraform-aws-modules/terraform-aws-appconfig/issues/8)) ([44f1a5d](https://github.com/terraform-aws-modules/terraform-aws-appconfig/commit/44f1a5db43fb3705c7ce382a907e26dbe209889f))
+
 ### [1.1.4](https://github.com/terraform-aws-modules/terraform-aws-appconfig/compare/v1.1.3...v1.1.4) (2023-10-30)
 
 
