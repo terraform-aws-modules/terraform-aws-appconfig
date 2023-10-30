@@ -24,7 +24,7 @@ resource "aws_appconfig_application" "this" {
 }
 
 resource "aws_appconfig_environment" "this" {
-  for_each = var.create ? var.environments : {}
+  for_each = { for k, v in var.environments : k => v if var.create }
 
   name           = lookup(each.value, "name", var.name)
   description    = lookup(each.value, "description", var.description)

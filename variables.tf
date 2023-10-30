@@ -44,9 +44,9 @@ variable "config_profile_description" {
 }
 
 variable "config_profile_type" {
-  description = "Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform"
+  description = "Type of configurations contained in the profile. Valid values: `AWS.AppConfig.FeatureFlags` and `AWS.Freeform`"
   type        = string
-  default     = "AWS.Freeform"
+  default     = null
 }
 
 variable "config_profile_location_uri" {

@@ -1,0 +1,13 @@
+{
+    "flags": {
+        "is_enabled": {
+            "name": "isEnabled"
+        }
+    },
+    "values": {
+        "is_enabled": {
+            "enabled": "false"
+        }
+    },
+    "version": "1"
+}

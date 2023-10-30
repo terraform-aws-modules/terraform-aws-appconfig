@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "appconfig-ex-${replace(basename(path.cwd), "_", "-")}"
+  name   = "ex-${basename(path.cwd)}"
 
   tags = {
     Name       = local.name
@@ -14,7 +14,6 @@ locals {
 }
 
 data "aws_region" "current" {}
-
 data "aws_caller_identity" "current" {}
 
 ################################################################################
@@ -70,7 +69,7 @@ data "archive_file" "lambda_handler" {
 
 module "validate_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 2.0"
+  version = "~> 6.0"
 
   function_name = local.name
   description   = "Configuration semantic validation lambda"
@@ -107,11 +106,6 @@ module "s3_bucket" {
 
   # Intended for example use only
   force_destroy = true
-
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
 
   server_side_encryption_configuration = {
     rule = {

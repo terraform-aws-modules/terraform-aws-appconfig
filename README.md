@@ -9,7 +9,6 @@ See [`examples`](https://github.com/terraform-aws-modules/terraform-aws-appconfi
 ```hcl
 module "appconfig" {
   source  = "terraform-aws-modules/appconfig/aws"
-  version = "~> 1.0"
 
   name        = "example"
   description = "AppConfig hosted configuration"
@@ -69,7 +68,6 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
  give users references for how to use the module(s) as well as testing/validating changes to the source code of the module(s). If contributing to the project, please be sure to make any appropriate updates to the relevant examples to allow maintainers to test your changes and to keep the examples up to date for users. Thank you!
 
 - [AppConfig Hosted](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/appconfig_hosted)
-- [Feature Flag](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/feature_flag)
 - [S3](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/s3)
 - [SSM Document](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm_document)
 - [SSM Parameter](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm_parameter)
@@ -79,14 +77,14 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.6 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 
 ## Modules
 
@@ -119,7 +117,7 @@ No modules.
 | <a name="input_config_profile_name"></a> [config\_profile\_name](#input\_config\_profile\_name) | The name for the configuration profile. Must be between 1 and 64 characters in length | `string` | `null` | no |
 | <a name="input_config_profile_retrieval_role_arn"></a> [config\_profile\_retrieval\_role\_arn](#input\_config\_profile\_retrieval\_role\_arn) | The ARN of an IAM role with permission to access the configuration at the specified `location_uri`. A retrieval role ARN is not required for configurations stored in the AWS AppConfig `hosted` configuration store. It is required for all other sources that store your configuration | `string` | `null` | no |
 | <a name="input_config_profile_tags"></a> [config\_profile\_tags](#input\_config\_profile\_tags) | A map of additional tags to apply to the configuration profile | `map(string)` | `{}` | no |
-| <a name="input_config_profile_type"></a> [config\_profile\_type](#input\_config\_profile\_type) | Type of configurations contained in the profile. Valid values: AWS.AppConfig.FeatureFlags and AWS.Freeform | `string` | `"AWS.Freeform"` | no |
+| <a name="input_config_profile_type"></a> [config\_profile\_type](#input\_config\_profile\_type) | Type of configurations contained in the profile. Valid values: `AWS.AppConfig.FeatureFlags` and `AWS.Freeform` | `string` | `null` | no |
 | <a name="input_config_profile_validator"></a> [config\_profile\_validator](#input\_config\_profile\_validator) | A set of methods for validating the configuration. Maximum of 2 | `list(map(any))` | `[]` | no |
 | <a name="input_create"></a> [create](#input\_create) | Determines whether resources are created | `bool` | `true` | no |
 | <a name="input_create_deployment_strategy"></a> [create\_deployment\_strategy](#input\_create\_deployment\_strategy) | Determines whether a deployment strategy is created | `bool` | `true` | no |
