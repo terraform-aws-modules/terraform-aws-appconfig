@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1](https://github.com/terraform-aws-modules/terraform-aws-appconfig/compare/v2.0.0...v2.0.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#11](https://github.com/terraform-aws-modules/terraform-aws-appconfig/issues/11)) ([fa9b38f](https://github.com/terraform-aws-modules/terraform-aws-appconfig/commit/fa9b38f7bd92941f5099f3c22a00c9ea2a8687fe))
+
 ## [2.0.0](https://github.com/terraform-aws-modules/terraform-aws-appconfig/compare/v1.1.4...v2.0.0) (2023-10-30)
 
 
