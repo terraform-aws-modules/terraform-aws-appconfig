@@ -18,7 +18,7 @@ $ terraform apply
 
 Note that this example may create resources which will incur monetary charges on your AWS bill. Run `terraform destroy` when you no longer need these resources.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -74,6 +74,6 @@ No inputs.
 | <a name="output_retrieval_role_policy_policy"></a> [retrieval\_role\_policy\_policy](#output\_retrieval\_role\_policy\_policy) | The retrieval role policy document |
 | <a name="output_retrieval_role_policy_policy_id"></a> [retrieval\_role\_policy\_policy\_id](#output\_retrieval\_role\_policy\_policy\_id) | The retrieval role policy ID |
 | <a name="output_retrieval_role_unique_id"></a> [retrieval\_role\_unique\_id](#output\_retrieval\_role\_unique\_id) | Stable and unique string identifying the retrieval role |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-appconfig/blob/master/LICENSE).
