@@ -1,6 +1,8 @@
-# Terraform AWS AppConfig examples
+# Examples
 
-- [AppConfig Hosted](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/appconfig-hosted)
-- [S3](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/s3)
-- [SSM Document](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm-document)
-- [SSM Parameter](https://github.com/terraform-aws-modules/terraform-aws-appconfig/tree/master/examples/ssm-parameter)
+Please note - the examples provided serve two primary means:
+
+1. Show users working examples of the various ways in which the module can be configured and features supported
+2. A means of testing/validating module changes
+
+Please do not mistake the examples provided as "best practices". It is up to users to consult the AWS service documentation for best practices, usage recommendations, etc.
