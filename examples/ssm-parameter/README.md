@@ -23,7 +23,7 @@ Note that this example may create resources which will incur monetary charges on
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | >= 2.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0 |
@@ -31,21 +31,21 @@ Note that this example may create resources which will incur monetary charges on
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_archive"></a> [archive](#provider\_archive) | >= 2.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_appconfig"></a> [appconfig](#module\_appconfig) | ../../ | n/a |
 | <a name="module_validate_lambda"></a> [validate\_lambda](#module\_validate\_lambda) | terraform-aws-modules/lambda/aws | ~> 6.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_ssm_parameter.config](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_parameter) | resource |
 | [archive_file.lambda_handler](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 
@@ -56,7 +56,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_application_arn"></a> [application\_arn](#output\_application\_arn) | The Amazon Resource Name (ARN) of the AppConfig Application |
 | <a name="output_application_id"></a> [application\_id](#output\_application\_id) | The AppConfig application ID |
 | <a name="output_configuration_profile_arn"></a> [configuration\_profile\_arn](#output\_configuration\_profile\_arn) | The Amazon Resource Name (ARN) of the AppConfig Configuration Profile |
